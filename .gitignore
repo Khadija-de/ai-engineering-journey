@@ -1,0 +1,46 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local data: keep source and access documentation
+**/data/**
+!**/data/
+!**/data/README.md
+!**/data/.gitkeep
+
+# Model artifacts and local experiment outputs
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.hdf5
+*.safetensors
+*.pkl
+*.joblib
+**/checkpoints/
+**/outputs/
+**/runs/
+**/mlruns/
+**/wandb/
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
