@@ -4,8 +4,8 @@ Can an industrial defect detector retain its performance when its memory of norm
 
 This project investigates that question using the **MVTec AD bottle dataset**, pretrained visual features, and nearest-neighbor anomaly scoring.
 
-**Status:** baseline and random-memory experiments completed. Coreset comparison is planned.
-
+**Status:** **Status:** random-memory baseline and approximate coreset comparison
+completed. Dataset exploration across categories is next.
 ## Main finding
 
 Across three random seeds, a memory bank containing **1% of the normal training patch vectors** detected all 63 defective test images, with zero or one false alarm among 20 normal images.
@@ -89,6 +89,43 @@ AUROC measures score ranking across thresholds. It does not measure accuracy at 
 For example, the 0.5% bank with seed 44 achieved AUROC 1.0 but incorrectly flagged two normal images. All defective images scored above all normal images, while the validation-derived threshold still fell below two normal test scores.
 
 ![Ranking versus threshold decisions](figures/ranking_vs_threshold_seed44_0p5pct.png)
+
+## Coreset versus random sampling
+
+We compared random sampling with approximate greedy farthest-first
+selection at equal memory budgets.
+
+For coreset selection, training features were projected from 1,024
+to 128 dimensions using a Gaussian random projection. Selected
+indices retrieved the original 1,024-dimensional vectors for scoring.
+
+Both methods used three seeds and the same validation/test split.
+Each configuration received a separately calibrated threshold.
+
+| Vectors | Method | Missed defects: seeds 42 / 43 / 44 | False alarms: seeds 42 / 43 / 44 |
+|---:|---|---|---|
+| 131 | Coreset | 0 / 1 / 0 | 0 / 2 / 1 |
+| 131 | Random | 10 / 8 / 4 | 1 / 0 / 1 |
+| 658 | Coreset | 0 / 0 / 0 | 1 / 2 / 1 |
+| 658 | Random | 0 / 1 / 0 | 1 / 1 / 2 |
+| 1,317 | Coreset | 0 / 0 / 0 | 2 / 1 / 1 |
+| 1,317 | Random | 0 / 0 / 0 | 0 / 1 / 0 |
+
+Counts are per run: 63 defective and 20 normal test images.
+
+![Coreset versus random sampling](figures/random_vs_coreset_errors.png)
+
+Representative selection substantially reduced missed defects at the
+smallest budget. Its advantage narrowed at larger budgets, and it did
+not consistently reduce false alarms.
+
+These are follow-up experiments on the same bottle test set.
+Three seeds measure selection variability, not independent datasets.
+The sampler is an approximation, not an exact reproduction of the
+official PatchCore implementation.
+
+- [Coreset comparison notebook](notebooks/02_coreset_vs_random.ipynb)
+- [All 18 results](results/random_vs_coreset_comparison.csv)
 
 ## Repository contents
 

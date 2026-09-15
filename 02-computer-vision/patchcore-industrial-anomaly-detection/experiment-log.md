@@ -155,13 +155,69 @@ This illustrates the distinction between:
 
 The threshold was retained rather than adjusted using test labels.
 
-## Planned experiment — Coreset comparison
+## EXP-004 — Approximate coreset versus random sampling
 
-**Status:** planned; no comparison results yet.
+**Status:** completed.
 
 ### Question
 
-At equal memory budgets, does representative selection preserve detection quality better than random sampling?
+At equal feature-memory budgets, does representative selection
+preserve detection quality better than random sampling?
+
+### Method
+
+- Gaussian random projection: 1,024 → 128 dimensions.
+- Greedy farthest-first selection with a random starting vector.
+- Budgets: 131, 658, and 1,317 vectors, using nested selections.
+- Seeds: 42, 43, and 44.
+- Scoring uses the original 1,024-dimensional vectors.
+- Each threshold is calibrated on the same 41 normal validation images.
+- Selection uses training features only.
+
+The seed changes both the projection and the starting vector.
+
+### Findings
+
+At 131 vectors, coreset missed 0, 1, and 0 defects, compared with
+10, 8, and 4 for random sampling.
+
+At 658 vectors, coreset missed no defects across all seeds.
+Random sampling missed one defect in one run.
+
+At 1,317 vectors, neither method missed defects. Coreset produced
+2, 1, and 1 false alarms, compared with 0, 1, and 0 for random sampling.
+
+Coreset AUROC at 131 vectors was 1.0000, 0.9952, and 1.0000.
+At both larger budgets, it was 1.0000 across all seeds.
+
+### Interpretation
+
+The largest benefit appeared under the tightest memory budget.
+Coreset did not outperform random sampling on every measure.
+
+Perfect ranking can coexist with false alarms because the decision
+threshold is calibrated separately from test evaluation.
+
+### Limitations
+
+The same 83 test images were reused throughout.
+No independent-category evaluation, quantitative localization
+evaluation, or controlled runtime benchmark was performed.
+
+This sampler approximates representative selection and is not an
+exact reproduction of the official PatchCore sampler.
+
+### Evidence
+
+- [Comparison notebook](notebooks/02_coreset_vs_random.ipynb)
+- [18-run results](results/random_vs_coreset_comparison.csv)
+- [Comparison figure](figures/random_vs_coreset_errors.png)
+
+### Decision
+
+Complete this bottle comparison and move to the all-category dataset
+explorer. Reserve new-category test results until the evaluation
+procedure is fixed.
 
 ### Proposed approach
 
