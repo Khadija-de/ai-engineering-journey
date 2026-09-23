@@ -1,3 +1,17 @@
+## Dataset attribution and license
+
+This educational project uses the **MVTec Anomaly Detection (MVTec AD)** dataset provided by **MVTec Software GmbH**.
+
+- **Dataset source:** https://www.mvtec.com/research-teaching/datasets/mvtec-ad
+- **Dataset license:** [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+Dataset images and masks displayed in the notebooks remain subject to the dataset license and are excluded from this repository’s software license. Adapted dataset images are shared under CC BY-NC-SA 4.0. Any modifications, such as resizing, cropping, or adding overlays, should be described alongside the relevant figures.
+
+The repository’s software license does not replace the licenses of third-party datasets, code, or other materials.
+
+This is an independent learning project and is not endorsed by MVTec.
+
+
 # Computer Vision
 
 Turn images into useful predictions and inspect where models fail.
