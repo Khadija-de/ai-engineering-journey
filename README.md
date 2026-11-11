@@ -8,7 +8,17 @@ This repository documents my growth in data engineering, machine learning, and A
 
 My starting point includes mathematical foundations in machine learning and deep learning, experience cleaning data, and a waste-detection project that used collected images and a model on a robot camera. That experience provides context for this journey; its implementation and results are not yet included here.
 
-**Current status:** repository scaffold. The ideas below are planned learning directions, not completed projects or claimed results.
+**Current status:** portfolio in progress. The repository includes one completed experimental study; the other learning areas below are planned directions, not completed projects or claimed results.
+
+## Featured project: PatchCore-style industrial anomaly detection
+
+[Explore the project](02-computer-vision/patchcore-industrial-anomaly-detection/README.md) for an experiment comparing random memory sampling with approximate coreset selection on the MVTec AD bottle category.
+
+- With a 1% memory bank, random sampling detected all 63 defective test images across three seeds, with 0–1 false alarms among 20 normal images.
+- At the smallest budget (0.1%), coreset selection missed 0–1 defects versus 4–10 for random sampling; it did not consistently reduce false alarms.
+- These are follow-up experiments on one category and the same test split—not independent evaluations. Quantitative localization and production/runtime performance were not evaluated.
+
+The project uses frozen pretrained visual features and includes notebooks, experiment records, result tables, and figures. Dataset files are not included; see the project README for methods, attribution, and limitations.
 
 ## Learning philosophy
 
@@ -52,9 +62,9 @@ The numbering organizes topics; it is not a requirement to finish every area in 
 
 Use [the project template](docs/project-template.md) for each project's README and [the experiment log](docs/experiment-log.md) to track your work.
 
-## Start your first project
+## Next project idea
 
-A manageable first idea is **a data-quality pipeline for an operational dataset**: load a public CSV, document its schema, handle missing or duplicate records, validate the output, and explain how quality issues affect one useful metric.
+A manageable next project is **a data-quality pipeline for an operational dataset**: load a public CSV, document its schema, handle missing or duplicate records, validate the output, and explain how quality issues affect one useful metric.
 
 1. Create `01-data-engineering/operational-data-quality/`.
 2. Copy `docs/project-template.md` into that folder as `README.md`.
@@ -99,7 +109,8 @@ Add rows as projects begin. Link to the project folder and use a clear status su
 
 | Project | Area | Status | Evidence |
 | --- | --- | --- | --- |
-| First project — to be selected | Data engineering | Planned | No results yet |
+| [PatchCore-style industrial anomaly detection](02-computer-vision/patchcore-industrial-anomaly-detection/README.md) | Computer vision | Experiment complete | Results and limitations documented in the project README |
+| Operational data-quality pipeline | Data engineering | Planned | No results yet |
 
 ## Data and repository hygiene
 
